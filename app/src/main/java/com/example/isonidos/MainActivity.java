@@ -3,8 +3,10 @@ package com.example.isonidos;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,5 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void reproduceVideo (View vista){
+        VideoView videoview = (VideoView) findViewById(R.id.videoView);
+        int idVideo = this.getResources().getIdentifier(vista.getTag().toString(), "raw", this.getPackageName());
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+idVideo);
+        videoview.setVideoURI(uri);
+        videoview.start();
     }
 }
